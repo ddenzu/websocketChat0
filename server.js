@@ -19,14 +19,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const room = io.of('/room');
-// let roomList = []; // room 이름을 저장할 배열
 
 const roomList = {};
 
 room.on('connection', (socket) => {
   console.log('room 네임스페이스에 접속');
   const roomName = socket.handshake.query.room;
-
   // roomList에 해당 roomName이 없을 경우에만 새로운 room 추가
   if (!roomList.hasOwnProperty(roomName)) {
     roomList[roomName] = 1; // 해당 roomName의 value를 1로 초기화
@@ -37,18 +35,19 @@ room.on('connection', (socket) => {
 
   socket.join(roomName);
   console.log(`${socket.id}이(가) ${roomName}에 조인되었습니다.`);
+  socket.broadcast.to(roomName).emit('clientJoined');
 
   socket.on('message', data => {
-    room.to(roomName).emit('message', data);
-  });
+    socket.broadcast.to(roomName).emit('message', data);
+});
 
   socket.on('disconnect', () => {
     console.log('room 네임스페이스 접속 해제');
     roomList[roomName]--;
     if (roomList[roomName] <= 0) {
-      // 만약 value가 0 이하이면 해당 roomName을 roomList에서 삭제
       delete roomList[roomName];
     }
+    socket.broadcast.to(roomName).emit('leaveRoom'); 
     console.log(roomList);
   });
 });
@@ -60,7 +59,6 @@ server.listen(PORT, () => {
 app.get('/data', (req, res) => {
   console.log(roomList)
   try {
-    // 클라이언트에게 roomList 데이터를 응답으로 보냄
     res.status(200).json(roomList);
   } catch (error) {
     console.error('Error sending roomList:', error);
@@ -69,10 +67,6 @@ app.get('/data', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.redirect('http://localhost:3000/');
-  // res.redirect('http://116.38.253.38:3000/login');
+  res.redirect('https://ddenzu.github.io/websocketChat/');
+  // res.redirect('http://116.38.253.38:3000/');
 });
-
-// app.get("*", function(req, res){
-//   res.sendFile(path.join(__dirname, '/chat/build/index.html'))
-// });
