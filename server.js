@@ -17,8 +17,7 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'))
-app.use(express.static(path.join(__dirname, 'rtc-front/build')));
+app.use(express.static(path.join(__dirname, '/rtc-front/build')));
 
 const room = io.of('/room');
 
@@ -70,6 +69,6 @@ app.get('/data', (req, res) => {
 
 app.get('/', (req, res) => {
   // res.redirect('https://ddenzu.github.io/websocketChat/');
-  res.sendFile(path.join(__dirname, '/rtc-front/build/index.html'));
+  res.sendFile(path.join(__dirname, '../rtc-front/build/index.html'));
   // res.redirect('http://116.38.253.38:3000/');
 });
