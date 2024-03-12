@@ -1,0 +1,13 @@
+{
+  "name": "rtc_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "heroku-prebuild":"cd client && npm ci && npm run build && move build ../server",
+    "start": "cd server && npm ci && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
