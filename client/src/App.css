@@ -1,0 +1,274 @@
+body, html {
+  /* margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-image: url('/public/bg.png'); */
+  background-color: #111;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 2px, transparent 2px),
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.App{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.roomList {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  /* background-color: rgba(32, 33, 36, 0.9); */
+  width: 50%;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.roomList button {
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+}
+.foot {
+  background-color: rgba(0, 0, 0, 0.6);
+  position : absolute;
+  bottom : 0;
+  width: 100%;
+  height: 7%;
+  color: white;
+  text-align: center;
+}
+.chat-box {
+  height: 15%;
+  font-size: 15px;
+  position: absolute;
+  top: 13px;
+  right: 12px;
+  color: white;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+}
+.messages-area {
+  overflow-y: auto; 
+  height: 85%;
+  display: flex;
+  flex-direction: column-reverse; 
+}
+.chat-box button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  margin-left: 3px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.chat-box input {
+  outline: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+@media screen and (min-width: 1023px) {
+  .roomList {
+    width: 33%;
+  }
+}
+@media screen and (max-width: 430px) {
+  .roomList {
+    width: 70%;
+  }
+}
+.control-bar {
+  width: 80%;
+  height: 40px;
+  margin: 20px;
+  background-color: rgba(45, 46, 67, 0.7);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+  position: absolute; 
+  bottom: 0;
+  z-index: 1;
+}
+.file-select {
+  width: 20%;
+  margin: 0 auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 10px;
+  color: white;
+}
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px; 
+  height: 30px; 
+  margin-right: 20px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff; 
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px; 
+  width: 26px; 
+  left: 2px;
+  bottom: 2px;
+  background-color: #888; 
+  border-radius: 50%; 
+  transition: 0.4s;
+}
+.range-select{
+  width: 25%;
+  margin: 0 auto;
+}
+
+.color-selector {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+  margin: 10 auto;
+}
+@media screen and (max-width: 710px) {
+  .color-selector {
+    margin: 0;
+  }
+  .color-option {
+    margin-right: 5px;
+  }
+}
+@media screen and (min-width: 800px){
+  .control-bar {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 430px) {
+  .roomList {
+    width: 70%;
+  }
+  .control-bar {
+    height: 80px;
+    width: 70%;
+    position: absolute;
+  }
+  .file-select {
+    position: absolute;
+    top:15px;
+    left: 0;
+    right: 50%;
+    bottom: 50%;
+  }
+  .range-select {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    right: 0;
+    bottom: 50%;
+    width: 40%;
+  }
+  .color-selector {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+  }
+  .toggle {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+.color-underline {
+  position: relative;
+  border: 2px solid #CCCCCC;
+}
+.color-underline::before {
+  content: "";
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  width: 10px; 
+  height: 10px; 
+  border-radius: 50%;
+  background-color: #CCCCCC; 
+  transform: translate(-50%, -50%);
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: rgb(54, 197, 41);
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.black {
+  background-color: black;
+}
+
+.white {
+  background-color: white;
+}
+
+input:checked + .slider {
+  background-color: #4CAF50; 
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px); 
+}
