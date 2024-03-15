@@ -41,8 +41,7 @@ room.on('connection', (socket) => {
 
   socket.on('message', data => {
     socket.broadcast.to(roomName).emit('message', data);
-});
-
+  });
   socket.on('disconnect', () => {
     console.log('room 네임스페이스 접속 해제');
     roomList[roomName]--;
@@ -71,3 +70,11 @@ app.get('/data', (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/build/index.html'));
 });
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
