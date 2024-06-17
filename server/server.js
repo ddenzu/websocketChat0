@@ -20,6 +20,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'build')));
 //build 폴더 허용
 
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
 const room = io.of('/room');
 
 const roomList = {};
@@ -27,11 +31,17 @@ const roomList = {};
 room.on('connection', (socket) => {
   console.log('room 네임스페이스에 접속');
   const roomName = socket.handshake.query.room;
+  const roomPassword = socket.handshake.query.password;
+  console.log(roomPassword);
+
   // roomList에 해당 roomName이 없을 경우에만 새로운 room 추가
   if (!roomList.hasOwnProperty(roomName)) {
-    roomList[roomName] = 1; // 해당 roomName의 value를 1로 초기화
+    roomList[roomName] = {
+      count: 1, // 해당 roomName의 사용자 수를 1로 초기화
+      password: roomPassword // 해당 roomName의 비밀번호를 저장
+    };
   } else {
-    roomList[roomName]++; // 이미 존재하는 roomName의 value에 1을 더함
+    roomList[roomName].count++; // 이미 존재하는 roomName의 사용자 수에 1을 더함
   }
   console.log(roomList);
 
@@ -42,10 +52,11 @@ room.on('connection', (socket) => {
   socket.on('message', data => {
     socket.broadcast.to(roomName).emit('message', data);
   });
+  
   socket.on('disconnect', () => {
     console.log('room 네임스페이스 접속 해제');
-    roomList[roomName]--;
-    if (roomList[roomName] <= 0) {
+    roomList[roomName].count--;
+    if (roomList[roomName].count <= 0) {
       delete roomList[roomName];
     }
     socket.broadcast.to(roomName).emit('leaveRoom'); 
@@ -53,17 +64,26 @@ room.on('connection', (socket) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
-
 app.get('/data', (req, res) => {
-  console.log(roomList)
   try {
     res.status(200).json(roomList);
   } catch (error) {
-    console.error('Error sending roomList:', error);
-    res.status(500).send('Internal Server Error');
+    console.error('채팅방 오류:', error.message);
+    res.status(500).send('서버 에러');
+  }
+});
+
+app.post('/checkPassword', (req, res) => {
+  try{
+    const { roomName, roomPassword } = req.body;
+    if (roomList[roomName] && roomList[roomName].password === roomPassword) {
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch (error) {
+    console.error('비밀번호 확인 에러:', error.message);
+    res.status(500).json({ success: false, error: '서버 에러' });
   }
 });
 
