@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use('/api', require('./routes/api.js'));
 
 const roomSpace = io.of('/room');
-require('./utils/room.js')(roomSpace);
+require('./socket/room.js')(roomSpace);
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '/build/index.html'), function(err) {
