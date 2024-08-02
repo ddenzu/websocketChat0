@@ -1,4 +1,4 @@
-const { roomList } = require('../socket/room.js');
+const { roomList } = require('../websocket/room.js');
 
 // 방 목록 조회
 const getRoomList = (req, res) => {
