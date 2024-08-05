@@ -9,6 +9,12 @@ Node.js + Express + React + Socket.io
 ### 🌎 배포 주소
  - https://websocket-chat-ddenzu.koyeb.app/
 
+### 📃 세부 내용
+ - [https://tidal-sky-46b.notion.site/Seung-Ju-Kim-ce8841c405754d8da3b302c3e7abfbc8?p=022199140ed443ce8e28c54f87803f57&pm=c](https://tidal-sky-46b.notion.site/Seung-Ju-Kim-ce8841c405754d8da3b302c3e7abfbc8?p=92bce0c3d22f4e85a9e7ff4993620d4d&pm=c)
+
+### 📍 프론트 레파지토리
+ - https://github.com/ddenzu/WebSocket-project
+
 ### 🕰️ 개발 시작일
  - 24.02.14일
 
