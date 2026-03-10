@@ -1,33 +1,33 @@
 # WebSocket Chat (공유 그림판)
 Node.js + Express + React + Socket.io
 
-## 🖥️ 프로젝트 소개
+## 프로젝트 소개
 간단한 소통을 위해 그림판을 공유할 수 있는 웹사이트입니다.
 <br>
 
-## 📌 개요
-### 🌎 배포 주소
+## 개요
+### 배포 주소
  - https://websocket-chat-ddenzu.koyeb.app/
 
-### 📃 세부 내용
+### 세부 내용
  - [https://tidal-sky-46b.notion.site/Seung-Ju-Kim-ce8841c405754d8da3b302c3e7abfbc8?p=022199140ed443ce8e28c54f87803f57&pm=c](https://tidal-sky-46b.notion.site/Seung-Ju-Kim-ce8841c405754d8da3b302c3e7abfbc8?p=92bce0c3d22f4e85a9e7ff4993620d4d&pm=c)
 
-### 📍 프론트 레파지토리
+### 프론트 레파지토리
  - https://github.com/ddenzu/WebSocket-project
 
-### 🕰️ 개발 시작일
+### 개발 시작일
  - 24.02.14일
 
-### 🧑‍🤝‍🧑 맴버구성
+### 맴버구성
  - 1인 개인 프로젝트
 
-### ⚙️ 개발 환경
+### 개발 환경
 - `Node.js v20.10.0`
 - **IDE** : Visual Studio Code
 - **Framework** : Express(4.19.2)
 - **Frontend** : React
 
-## 📌 주요 기능
+## 주요 기능
 #### 방 생성 및 참가
 - 제목과 비밀번호를 설정하여 방 생성
 - Socket.io 의 네임스페이스를 사용하여 방을 분리하고 상태를 관리
@@ -52,6 +52,7 @@ Node.js + Express + React + Socket.io
 
 
   
-## 🌎 배포
+## 배포
 #### Koyeb
 - Koyeb 과 websocketChat0 레파지토리를 연동하여 배포
+
